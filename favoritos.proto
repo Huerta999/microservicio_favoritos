@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package favoritos;
+
+// Definimos los servicios (las funciones que se pueden llamar)
+service FavoritosService {
+  rpc ToggleFavorito (FavoritoRequest) returns (FavoritoResponse);
+  rpc GetFavoritos (UsuarioRequest) returns (ListaFavoritosResponse);
+}
+
+// Definimos las "cajas" de datos que viajan
+message FavoritoRequest {
+  string usuarioId = 1;
+  string productoId = 2;
+}
+
+message FavoritoResponse {
+  bool exito = 1;
+  string mensaje = 2;
+  bool esFavorito = 3; // true si se agregó, false si se quitó
+}
+
+message UsuarioRequest {
+  string usuarioId = 1;
+}
+
+message ListaFavoritosResponse {
+  repeated string productoIds = 1; // Devuelve una lista de IDs
+}
